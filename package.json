@@ -1,0 +1,37 @@
+{
+	"name": "vmw-cli",
+	"version": "2.0.0",
+	"description": "CLI interface for my.vmware.com",
+	"license": "MIT",
+	"repository": "apnex/vmw-cli",
+	"author": {
+		"name": "Andrew Obersnel"
+	},
+	"bin": {
+		"vmw-cli": "./lib/vmw.cli.js"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"files": [
+		"/lib"
+	],
+	"keywords": [
+		"myvmw",
+		"vmware",
+		"vmw-cli",
+		"vmw",
+		"nodejs",
+		""
+	],
+	"dependencies": {
+		"chalk": "*",
+		"got": "*",
+		"md5-file": "*",
+		"node-persist": "*",
+		"p-map": "*",
+		"progress": "*",
+		"tough-cookie": "*",
+		"tough-cookie-file-store": "*"
+	}
+}
