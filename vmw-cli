@@ -3,44 +3,10 @@ if [[ $0 =~ ^(.*)/([^/]+)$ ]]; then
 	WORKDIR="${BASH_REMATCH[1]}"
 	CALLED="${BASH_REMATCH[2]}"
 fi
-if [ -z ${SDDCDIR} ]; then
-	SDDCDIR=${PWD}
-fi
-
-function buildBash {
-read -r -d '' BASHSPEC <<CONFIG
-#!/bin/bash
-_${CALLED}_complete() {
-	## lock completion to first arg only
-	if [ \${#COMP_WORDS[@]} != "2" ]; then
-		return
-	fi
-	## temporarily set WIDTH to 0
-	local WIDTH=\$(bind -v | sed -n 's/^set completion-display-width //p')
-	if [[ \${WIDTH} -ne 0 ]]; then
-		bind "set completion-display-width 0"
-		PROMPT_COMMAND="PROMPT_COMMAND=\$(printf %q "\${PROMPT_COMMAND}")"
-		PROMPT_COMMAND+="; bind 'set completion-display-width \${WIDTH}'"
-	fi
-	## build command array
-	local ARRAY=\$(${CALLED} list | tr -d '\r') # handle CRLF in tty
-	local SUGGESTIONS=(\$(compgen -W "\${ARRAY[@]}" -- "\${COMP_WORDS[1]}"))
-	## return commands
-	COMPREPLY=("\${SUGGESTIONS[@]}")
-}
-complete -F _${CALLED}_complete ${CALLED}
-CONFIG
-printf "%s\n" "${BASHSPEC}"
-}
 
 # launch & persist (run + exec)
-if [[ -n "$1" ]]; then
+#if [[ -n "$1" ]]; then
 	case "${1}" in
-		'install') ## list commands
-			BASHFILE="${CALLED}.complete.bash"
-			printf "install [${BASHFILE}] to [/etc/bash_completion.d/]\n" 1>&2
-			buildBash >"/etc/bash_completion.d/${BASHFILE}"
-		;;
 		'stop') ## list commands
 			printf "[apnex/${CALLED}] stopping\n" 1>&2
 			docker rm -f ${CALLED} 2>/dev/null
@@ -54,12 +20,8 @@ if [[ -n "$1" ]]; then
 			fi
 			RUNNING=$(docker ps -q -f name="${CALLED}")
 			if [[ -n "$RUNNING" ]]; then
-				docker exec -t ${CALLED} ${CALLED} ${1} ${2} ${3}
+				docker exec -t ${CALLED} ${CALLED} "${@}"
 			fi
 		;;
 	esac
-fi
-
-# single (run)
-#docker rm -f ${CALLED} 2>/dev/null
-#docker run -t --rm -v ${SDDCDIR}:/cfg apnex/${CALLED} ${1} ${2} ${3}
+#fi
