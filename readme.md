@@ -168,7 +168,7 @@ $ vmw-cli ls vmware_nsx_t_data_center/3_x
 
 Note: This will default `<type>` = `PRODUCT_BINARY` as it was not specified.  
 
-#### View avilable types for version `3_x` under `vmware_nsx_t_data_center`
+#### View available types for version `3_x` under `vmware_nsx_t_data_center`
 ```
 $ vmw-cli ls vmware_nsx_t_data_center/3_x/
 ```
