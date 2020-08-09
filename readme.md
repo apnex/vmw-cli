@@ -1,4 +1,4 @@
-# vmw-cli
+# `vmw-cli`
 **2.0 marks the first in a series of releases of the new `vmw-cli` tool and supercedes all previous versions.**  
 **It has been built from the ground up to be aligned with the new `my.vmware.com` website.**  
 **New features will become available in on-going releases.**  
@@ -9,6 +9,8 @@ It provides an interface for programmatic query and download of VMware product b
 Every product.  
 Every version.  
 Every file.  
+
+`vmw-cli` uses the **my.vmware.com** Node.js SDK here: [`vmw-sdk`](https://github.com/apnex/vmw-sdk)
 
 #### Configure authentication for my.vmware.com  
 ```
@@ -24,7 +26,7 @@ Requested files via the `cp` command  will be downloaded to current working dire
 
 ### via NPM
 **vmw-cli requires NodeJS >= 8.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
-Once installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see *Usage* below
+Once installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
 ```
 npm install vmw-cli --global
 ```
