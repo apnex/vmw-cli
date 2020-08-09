@@ -18,6 +18,7 @@ fi
 				printf "[apnex/${CALLED}] not running - now starting\n" 1>&2
 				docker run -id --name ${CALLED} -e VMWUSER -e VMWPASS -v ${PWD}:/files --entrypoint=/bin/sh apnex/${CALLED} 1>&2
 			fi
+			### check if VMWUSER and VMWPASS match running container, if not, restart
 			RUNNING=$(docker ps -q -f name="${CALLED}")
 			if [[ -n "$RUNNING" ]]; then
 				docker exec -t ${CALLED} ${CALLED} "${@}"
