@@ -12,6 +12,7 @@ Every file.
 
 `vmw-cli` uses the **my.vmware.com** Node.js SDK here: [`vmw-sdk`](https://github.com/apnex/vmw-sdk)
 
+## Install
 #### Configure authentication for my.vmware.com  
 ```
 export VMWUSER='<username>'
@@ -20,7 +21,6 @@ export VMWPASS='<password>'
 **Note:** Any download attempts will be restricted to the entitlements afforded by your account.  
 Alternatively, if using `docker` commands, you can pass credentials directly to the container instead.
 
-## Install
 `vmw-cli` can be installed natively via NPM or consumed using a pre-built docker image.  
 Requested files via the `cp` command  will be downloaded to current working directory.
 
