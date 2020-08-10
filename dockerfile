@@ -1,4 +1,5 @@
 FROM alpine AS build
+LABEL stage=intermediate
 WORKDIR "/root"
 RUN	apk --no-cache add \
 	git \
