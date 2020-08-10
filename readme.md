@@ -26,8 +26,6 @@ Requested files via the `cp` command  will be downloaded to current working dire
 
 ### via NPM
 **vmw-cli requires NodeJS >= 8.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
-**NOTE:** Ensure you have `git` installed for your system or the `npm install` command will fail.
-
 ```
 npm install vmw-cli --global
 ```
