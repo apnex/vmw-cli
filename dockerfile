@@ -1,15 +1,17 @@
-FROM alpine
+FROM alpine AS build
+WORKDIR "/root"
 RUN	apk --no-cache add \
 	git \
 	nodejs \
 	nodejs-npm \
-	&& npm install npm@latest \
-	&& npm install vmw-cli --global \
-	&& npm cache clean --force \
-	&& npm remove npm --global \
-	&& apk del nodejs-npm git \
-	&& rm -rf /var/cache/apk/
-RUN mkdir -p /files /state
+	&& npm install npm@latest --global \
+	&& npm install vmw-cli
+
+FROM alpine
+COPY --from=build /root/node_modules /root/node_modules
+RUN	apk --no-cache add nodejs \
+	&& ln -s /root/node_modules/vmw-cli/lib/vmw.cli.js /usr/bin/vmw-cli \
+	&& mkdir -p /files /state
 ENV VMWFILESDIR "/files"
 ENV VMWSTATEDIR "/state"
-ENTRYPOINT ["vmw-cli"]	
+ENTRYPOINT ["vmw-cli"]
