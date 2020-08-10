@@ -26,10 +26,12 @@ Requested files via the `cp` command  will be downloaded to current working dire
 
 ### via NPM
 **vmw-cli requires NodeJS >= 8.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
-Once installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
+**NOTE:** Ensure you have `git` installed for your system or the `npm install` command will fail.
+
 ```
 npm install vmw-cli --global
 ```
+Once installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
 
 ### via Docker
 This is where we start the container using `docker run` with the required ENV parameters set.  
