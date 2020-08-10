@@ -1,0 +1,71 @@
+#!/bin/bash
+_temp_bind() { ## temporarily change a bunch of bind terminal settings
+        set -o emacs
+	bind "set completion-display-width 0"
+	bind "set history-preserve-point on"
+	bind "set show-all-if-ambiguous on"
+	bind "set show-all-if-unmodified on"
+	bind "set colored-completion-prefix on"
+	bind "set colored-stats on"
+	bind "set page-completions off"
+	bind "set completion-query-items 0"
+	bind "set skip-completed-text on"
+}
+_temp_base_complete() {
+	local CMDFILE=$1
+	local CUR PRV
+	local ARRAY=()
+	COMPREPLY=()
+	CUR="${COMP_WORDS[COMP_CWORD]}"
+	PRV="${COMP_WORDS[COMP_CWORD-1]}"
+	CYAN='\033[0;36m' # cyan
+	NC='\033[0m' # no colour
+	BB='\u001B[94m' # blueBright
+	BBC='\u001B[39m' # close
+
+	_temp_bind
+	local IFS=$'\n'
+	local PARAMLIST
+	local CURPARAM
+	local CURKEY
+
+	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
+		ARRAY=($(vmw.cli 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+	else # resolve params
+		if [[ ${#COMP_WORDS[@]} -eq 3 ]]; then
+			case ${PRV} in
+				"ls")
+					ARRAY=($(vmw-cli ls 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+				;;
+				"cp")
+					ARRAY=($(vmw-cli file 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+				;;
+			esac
+		fi
+	fi
+
+	local HEADER="${ARRAY[0]}"
+	local VALUES=("${ARRAY[@]:1}")
+	local SUGGESTIONS=($(compgen -W "${VALUES[*]}" -- "${CUR}"))
+	if [ "${#SUGGESTIONS[@]}" -ge "2" ]; then # print header/values
+		if [[ -n ${CURKEY} ]]; then
+			printf "${BB}<${CURKEY}>${BBC}" 1>&2
+			#_get_params
+		fi
+		printf "\n${BB}${HEADER}${BBC}" 1>&2
+		#for I in "${!SUGGESTIONS[@]}"; do
+		#	SUGGESTIONS[$I]="$(printf '%*s' "-$COLUMNS"  "${SUGGESTIONS[$I]}")"
+		#done
+		COMPREPLY=("${SUGGESTIONS[@]}")
+	else
+		if [ "${#SUGGESTIONS[@]}" == "1" ]; then
+			local ID="${SUGGESTIONS[0]%%\ *}"
+			COMPREPLY=("$ID")
+		fi
+	fi
+	return 0
+}
+_vmw_complete() {
+	_temp_base_complete
+}
+complete -o nosort -F _vmw_complete vmwcli
