@@ -1,6 +1,6 @@
 {
 	"name": "vmw-cli",
-	"version": "2.0.13",
+	"version": "2.0.14",
 	"description": "CLI interface for my.vmware.com",
 	"license": "MIT",
 	"repository": "apnex/vmw-cli",

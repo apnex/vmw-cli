@@ -30,7 +30,7 @@ _temp_base_complete() {
 	local CURKEY
 
 	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
-		ARRAY=($(vmw.cli 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+		ARRAY=($(vmw-cli 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 	else # resolve params
 		if [[ ${#COMP_WORDS[@]} -eq 3 ]]; then
 			case ${PRV} in
@@ -38,7 +38,7 @@ _temp_base_complete() {
 					ARRAY=($(vmw-cli ls 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 				;;
 				"cp")
-					ARRAY=($(vmw-cli file 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+					ARRAY=($(vmw-cli ls . 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 				;;
 			esac
 		fi
@@ -68,4 +68,4 @@ _temp_base_complete() {
 _vmw_complete() {
 	_temp_base_complete
 }
-complete -o nosort -F _vmw_complete vmwcli
+complete -o nosort -F _vmw_complete vmw-cli

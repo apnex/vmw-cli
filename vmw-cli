@@ -55,7 +55,7 @@ cstart() {
 	done
 	DSTRING+=" -v ${PWD}:/files"
 	docker rm -v $(docker ps -qa -f name=${CNAME} -f status=exited) 2>/dev/null
-	docker run -id --name ${CNAME} ${DSTRING} --entrypoint=/bin/sh apnex/${CNAME} 1>&2
+	docker run -itd --name ${CNAME} ${DSTRING} --entrypoint=/bin/sh apnex/${CNAME} 1>&2
 }
 
 ## exec normal commands
