@@ -21,8 +21,20 @@ export VMWPASS='<password>'
 **Note:** Any download attempts will be restricted to the entitlements afforded by your account.  
 Alternatively, if using `docker` commands, you can pass credentials directly to the container instead.
 
-`vmw-cli` can be installed natively via NPM or consumed using a pre-built docker image.  
-Requested files via the `cp` command  will be downloaded to current working directory.
+`vmw-cli` can be consumed using the Shell + Docker pre-built image (preferred), or installing the package via NPM.  
+By default, requested files via the `cp` command  will be downloaded to current working directory.
+
+### via Docker: Shell Integration
+Builds a shell command that links to the docker container.  
+Requires docker installed on your system.  
+
+```
+docker run apnex/vmw-cli shell > vmw-cli
+chmod 755 vmw-cli
+mv vmw-cli /usr/bin/
+```
+
+Once shell integration installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
 
 ### via NPM
 **vmw-cli requires NodeJS >= 8.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
@@ -31,8 +43,10 @@ npm install vmw-cli --global
 ```
 Once installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
 
-### via Docker
-This is where we start the container using `docker run` with the required ENV parameters set.  
+
+### via Docker [Manual]
+This is where we manually start the container using `docker run` with the required ENV parameters set.  
+This is not required if you have performed Shell Integration.  
 Subsequent commands are then issued using `docker exec` commands.  
 
 Start the container in background:
