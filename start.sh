@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function start {
-	vmw-cli
+	vmw-cli "${@}"
 }
 
 #if [ -z "$1" ]; then
