@@ -13,6 +13,9 @@ COPY --from=build /root/node_modules /root/node_modules
 RUN	apk --no-cache add nodejs \
 	&& ln -s /root/node_modules/vmw-cli/lib/vmw.cli.js /usr/bin/vmw-cli \
 	&& mkdir -p /files /state
+COPY vmw-cli /root/
+COPY vmw.complete /root/
+COPY start.sh /root/
 ENV VMWFILESDIR "/files"
 ENV VMWSTATEDIR "/state"
-ENTRYPOINT ["vmw-cli"]
+ENTRYPOINT ["/root/start.sh"]

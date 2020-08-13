@@ -10,6 +10,7 @@ _temp_bind() { ## temporarily change a bunch of bind terminal settings
 	bind "set page-completions off"
 	bind "set completion-query-items 0"
 	bind "set skip-completed-text on"
+	CLIBIND=1 ## flag shell enable
 }
 _temp_base_complete() {
 	local CMDFILE=$1
@@ -23,22 +24,24 @@ _temp_base_complete() {
 	BB='\u001B[94m' # blueBright
 	BBC='\u001B[39m' # close
 
-	_temp_bind
+	if [[ -z ${CLIBIND} ]]; then
+		_temp_bind ## don't set repeatedly set this as it freezes shell
+	fi
 	local IFS=$'\n'
 	local PARAMLIST
 	local CURPARAM
 	local CURKEY
 
 	if [[ ${#COMP_WORDS[@]} -le 2 ]]; then
-		ARRAY=($(vmw-cli 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+		ARRAY=($(vmw-cli ac 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 	else # resolve params
 		if [[ ${#COMP_WORDS[@]} -eq 3 ]]; then
 			case ${PRV} in
 				"ls")
-					ARRAY=($(vmw-cli ls 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+					ARRAY=($(vmw-cli ac ls 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 				;;
 				"cp")
-					ARRAY=($(vmw-cli ls . 2>/dev/null | tr -d '\r')) # handle CRLF in tty
+					ARRAY=($(vmw-cli ac ls . 2>/dev/null | tr -d '\r')) # handle CRLF in tty
 				;;
 			esac
 		fi

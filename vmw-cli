@@ -58,8 +58,13 @@ cstart() {
 	docker run -itd --name ${CNAME} ${DSTRING} --entrypoint=/bin/sh apnex/${CNAME} 1>&2
 }
 
-## exec normal commands
+## handle autocomplete - don't attach psuedo-tty
 cexec() {
+	docker exec ${CNAME} ${CNAME} "${@}"
+}
+
+## exec normal user commands
+texec() {
 	docker exec -t ${CNAME} ${CNAME} "${@}"
 }
 
@@ -78,10 +83,14 @@ case "${1}" in
 				cstop
 				cstart
 			fi
-			cexec "${@}"
 		else
 			printf "[apnex/${CALLED}] not running - now starting\n" 1>&2
 			cstart
+		fi
+		if [[ "${1}" = "ac" ]]; then
+			cexec "${@:2}" ## called from vmw.complete
+		else
+			texec "${@}" ## called from shell
 		fi
 	;;
 esac
