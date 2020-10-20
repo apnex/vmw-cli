@@ -11,6 +11,7 @@ CNAME="vmw-cli"
 LENV=()
 LENV+=("VMWUSER")
 LENV+=("VMWPASS")
+LENV+=("PWD")
 
 ## return specific running container env value
 CENV=()
