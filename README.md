@@ -37,7 +37,7 @@ mv vmw-cli /usr/bin/
 Once shell integration installed, `vmw-cli` can be leveraged directly via the `vmw-cli` shell command - see **Usage** below
 
 ### via NPM
-**vmw-cli requires NodeJS >= 8.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
+**vmw-cli requires NodeJS >= 12.x, some older Linux distros need to have NodeJS [manually updated](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)**  
 ```
 npm install vmw-cli --global
 ```
