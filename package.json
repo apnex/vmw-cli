@@ -1,6 +1,6 @@
 {
 	"name": "vmw-cli",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": "CLI interface for my.vmware.com",
 	"license": "MIT",
 	"repository": "apnex/vmw-cli",
@@ -30,7 +30,7 @@
 		"got": "*",
 		"md5-file": "*",
 		"node-persist": "*",
-		"p-map": "*",
+		"p-map": "=4.0.0",
 		"progress": "*",
 		"tough-cookie": "*",
 		"tough-cookie-file-store": "*"
