@@ -4,7 +4,7 @@ WORKDIR "/root"
 RUN	apk --no-cache add \
 	git \
 	nodejs \
-	nodejs-npm \
+	npm \
 	&& npm install npm@latest --global \
 	&& npm install vmw-cli
 
