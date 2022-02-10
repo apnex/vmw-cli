@@ -27,7 +27,7 @@
 	"dependencies": {
 		"vmw-sdk": "*",
 		"chalk": "*",
-		"got": "*",
+		"got": "^11.8.2",
 		"md5-file": "*",
 		"node-persist": "*",
 		"p-map": "=4.0.0",
