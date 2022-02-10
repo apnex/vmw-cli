@@ -3,7 +3,7 @@
 	"version": "2.1.2",
 	"description": "CLI interface for my.vmware.com",
 	"license": "MIT",
-	"repository": "remkolodder/vmw-cli",
+	"repository": "apnex/vmw-cli",
 	"author": {
 		"name": "Andrew Obersnel"
 	},
