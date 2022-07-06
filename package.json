@@ -10,6 +10,7 @@
 	"engines": {
 		"node": ">=8"
 	},
+	"type": "module",
 	"bin": {
 		"vmw-cli": "./lib/vmw.cli.js"
 	},
@@ -30,7 +31,7 @@
 		"got": "*",
 		"md5-file": "*",
 		"node-persist": "*",
-		"p-map": "=4.0.0",
+		"p-map": "*",
 		"progress": "*",
 		"tough-cookie": "*",
 		"tough-cookie-file-store": "*"
